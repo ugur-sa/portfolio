@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+---
+
+<Layout title="Ugur Sadiklar">
+	<div>
+		<h1 class="mb-8 text-3xl font-semibold">hey, I'm Ugur 👋</h1>
+		<p class="mb-8 text-xl">I'm a full-stack web developer. I currently attend university.</p>
+		<div class="mb-16">
+			<h1 class="mb-8 text-2xl font-semibold">Projects</h1>
+			<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+				{
+					projects.map((project) => (
+						<Card
+							title={project.data.title}
+							body={project.data.description}
+							href={`${project.collection}/${project.slug}`}
+						/>
+					))
+				}
+			</div>
+		</div>
+		<div>
+			<h1 class="mb-8 text-2xl font-semibold">Latest Posts</h1>
+		</div>
+	</div>
+</Layout>

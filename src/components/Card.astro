@@ -1,0 +1,22 @@
+---
+interface Props {
+	title: string;
+	body: string;
+	href: string;
+}
+
+const { href, title, body } = Astro.props;
+---
+
+{/* create a card component with tailwindcss for darkmode using the props above */}
+<div class="rounded-lg bg-white shadow-lg dark:bg-zinc-900">
+	<a href={href}>
+		<div class="p-4">
+			<div class="flex items-center gap-5">
+				<h1 class="text-2xl font-bold text-gray-800 dark:text-white">{title}</h1>
+				<span class="text-2xl">&rarr;</span>
+			</div>
+			<p class="mt-2 text-gray-600 dark:text-gray-300">{body}</p>
+		</div>
+	</a>
+</div>
