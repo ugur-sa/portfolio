@@ -1,0 +1,30 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export const getStaticPaths = async () => {
+	const posts = await getCollection('posts');
+	const paths = posts.map((posts: CollectionEntry<'posts'>) => ({
+		params: {
+			slug: posts.slug
+		},
+		props: {
+			posts
+		}
+	}));
+	return paths;
+};
+
+type Props = {
+	posts: CollectionEntry<'posts'>;
+};
+
+const { posts } = Astro.props;
+const { Content } = await posts.render();
+---
+
+<Layout title={`Projects | ${posts.data.title}`}>
+	<div class="prose prose-2xl relative mb-20 overflow-visible dark:prose-invert">
+		<Content />
+	</div>
+</Layout>

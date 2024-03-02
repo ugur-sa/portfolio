@@ -3,7 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import { getCollection } from 'astro:content';
 
-const projects = await getCollection('projects');
+const projects = await getCollection('projects').then((projects) => {
+	return projects.slice(0, 4);
+});
+const posts = await getCollection('posts').then((posts) => {
+	return posts.slice(0, 3);
+});
 ---
 
 <Layout title="Ugur Sadiklar">
@@ -11,7 +16,10 @@ const projects = await getCollection('projects');
 		<h1 class="mb-8 text-3xl font-semibold">hey, I'm Ugur 👋</h1>
 		<p class="mb-8 text-xl">I'm a full-stack web developer. I currently attend university.</p>
 		<div class="mb-16">
-			<h1 class="mb-8 text-2xl font-semibold">Projects</h1>
+			<div class="mb-8 flex items-center gap-4">
+				<h1 class="text-4xl font-bold">Projects</h1>
+				<a class="text-sm text-zinc-300" href="/projects">View All &rarr;</a>
+			</div>
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 				{
 					projects.map((project) => (
@@ -25,7 +33,33 @@ const projects = await getCollection('projects');
 			</div>
 		</div>
 		<div>
-			<h1 class="mb-8 text-2xl font-semibold">Latest Posts</h1>
+			<div class="mb-8 flex items-center gap-4">
+				<h1 class="text-4xl font-bold">Latest Posts</h1>
+				<a class="text-sm text-zinc-300" href="/blog">View All &rarr;</a>
+			</div>
+			<table class="w-full">
+				<tbody>
+					{/* Loop through the posts and display the title and date */}
+					{
+						posts.map((post) => (
+							<tr class="border-b border-zinc-200">
+								<td class="flex items-center justify-between py-4">
+									<a
+										class="font -bold
+									text-xl"
+										href={`${post.collection}/${post.slug}`}
+									>
+										{post.data.title}
+									</a>
+									<p class="text-sm text-zinc-300">
+										{new Date(post.data.date).toLocaleDateString()}
+									</p>
+								</td>
+							</tr>
+						))
+					}
+				</tbody>
+			</table>
 		</div>
 	</div>
 </Layout>
