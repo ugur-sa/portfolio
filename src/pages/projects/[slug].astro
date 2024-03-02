@@ -23,7 +23,7 @@ const { project } = Astro.props;
 const { Content } = await project.render();
 ---
 
-<Layout title={project.data.title}>
+<Layout title={`Projects | ${project.data.title}`}>
 	<div class="prose dark:prose-invert prose-2xl relative mb-20 overflow-visible">
 		<Content />
 	</div>
