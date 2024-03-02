@@ -10,6 +10,16 @@ const projectCollection = defineCollection({
 	})
 });
 
+const postCollection = defineCollection({
+	schema: z.object({
+		title: z.string(),
+		date: z.string(),
+		author: z.string(),
+		tags: z.string().array()
+	})
+});
+
 export const collections = {
-	projects: projectCollection
+	projects: projectCollection,
+	posts: postCollection
 };
