@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	posts: CollectionEntry<'posts'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<table class="w-full">
+	<tbody>
+		{/* Loop through the posts and display the title and date */}
+		{
+			posts.map((post) => (
+				<tr class="border-b border-zinc-200">
+					<td class="flex items-center justify-between py-2">
+						<a
+							class="font -bold
+                        text-xl"
+							href={`${post.collection}/${post.slug}`}
+						>
+							{post.data.title}
+						</a>
+						<p class="text-sm text-zinc-300">
+							{new Date(post.data.date).toLocaleDateString('de-DE')}
+						</p>
+					</td>
+				</tr>
+			))
+		}
+	</tbody>
+</table>

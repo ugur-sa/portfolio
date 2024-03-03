@@ -1,0 +1,20 @@
+---
+interface Props {
+	title: string;
+	href: string;
+	viewAll: boolean;
+}
+
+const { title, href, viewAll } = Astro.props;
+---
+
+<div class="mb-8 flex items-center gap-4">
+	<h1 class="text-4xl font-bold">{title}</h1>
+	{
+		viewAll && (
+			<a class="text-sm text-zinc-300 hover:text-zinc-100" href={`/${href}`}>
+				View All &rarr;
+			</a>
+		)
+	}
+</div>
