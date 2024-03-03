@@ -1,6 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import Prose from '../../components/Prose.astro';
+import { Image } from 'astro:assets';
 
 export const getStaticPaths = async () => {
 	const projects = await getCollection('projects');
@@ -24,7 +26,25 @@ const { Content } = await project.render();
 ---
 
 <Layout title={`Projects | ${project.data.title}`}>
-	<div class="prose dark:prose-invert prose-2xl relative mb-20 overflow-visible">
-		<Content />
+	<div class="mb-8">
+		<span class="mb-4 flex items-center gap-4"
+			><h1 class="text-3xl font-bold">{project.data.title}</h1>{
+				project.data.image !== null && (
+					<Image
+						src={project.data.image}
+						alt={project.data.title}
+						width={50}
+						height={50}
+						class={'rounded-full'}
+					/>
+				)
+			}</span
+		>
+		<p class="text-sm font-light text-zinc-400">
+			Published {new Date(project.data.date).toLocaleDateString('de-DE')}
+		</p>
 	</div>
+	<Prose>
+		<Content />
+	</Prose>
 </Layout>

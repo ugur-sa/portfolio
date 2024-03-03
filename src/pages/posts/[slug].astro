@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import Prose from '../../components/Prose.astro';
 
 export const getStaticPaths = async () => {
 	const posts = await getCollection('posts');
@@ -24,7 +25,7 @@ const { Content } = await posts.render();
 ---
 
 <Layout title={`Blog | ${posts.data.title}`}>
-	<div class="prose prose-2xl relative mb-20 overflow-visible dark:prose-invert">
+	<Prose>
 		<Content />
-	</div>
+	</Prose>
 </Layout>

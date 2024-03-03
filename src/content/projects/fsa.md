@@ -1,30 +1,27 @@
 ---
 author: 'Ugur Sadiklar'
 category: ['machine learning, bert, yahoo finance']
-date: '2024-02-29'
+date: 2024-02-29
 featured: false
-image: ./raceboards.jpg
+image: /images/fsa/logo.png
 title: 'FSA'
 description: 'A project to analyse sentiment of financial news articles'
+draft: false
 ---
 
-### Financial Sentiment Analysis
+## Financial Sentiment Analysis
 
-<span class="text-lg">This is a project I built for my bachelor's thesis in 2024. It's a simple project created with Nextjs and deployed to AWS and Vercel.</span>
+This is a project I built for my bachelor's thesis in 2024. It's a simple project created with Nextjs and deployed to AWS and Vercel
 
-#### Features
+### Features
 
-<ul>
-  <li class="text-lg">Analyse sentiment of financial news articles</li>
-</ul>
+- Analyse sentiment of financial news articles
 
-#### Tech Stack
+### Tech Stack
 
-<ul>
-  <li class="text-lg">Next.js</li>
-  <li class="text-lg">Vercel</li>
-  <li class="text-lg">Tailwind CSS</li>
-  <li class="text-lg">AWS Lambda</li>
-  <li class="text-lg">AWS API Gateway</li>
-  <li class="text-lg">AWS DynamoDB</li>
-</ul>
+- Next.js
+- Vercel
+- Tailwind CSS
+- AWS Lambda
+- AWS API Gateway
+- AWS DynamoDB

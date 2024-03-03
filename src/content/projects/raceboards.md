@@ -1,25 +1,35 @@
 ---
-author: 'Ugur Sadiklar'
-category: ['sim racing']
-date: '2024-02-29'
+author: Ugur Sadiklar
+category:
+  - sim racing
+date: 2024-03-03T19:08:43.602Z
 featured: false
-image: ./raceboards.jpg
-title: 'Raceboards'
-description: 'A simple project to keep track of lap times and races for sim racers'
+image: /images/raceboards/f1.webp
+title: Raceboards
+description: A simple project to keep track of lap times and races for sim racers
+slug: raceboards
+draft: false
 ---
 
-# Raceboards
+This is a project I built in early 2023 for my friends and I to use for sim racing. It's a simple project that is implemented with Next.js and deployed to Vercel.
 
-This is a project I built in early 2023 for my friends and I to use while sim racing. It's a simple project that is implemented with Next.js and deployed to Vercel.
+### Features
 
-## Features
+Compare lap times on each Formula 1 track with your friends
+![Lap Times](../../../public/images/raceboards/raceboards_bestTimes.JPG)
 
-- Keep track of lap times
-  ![Lap Times](../../../public/images/raceboards_bestTimes.JPG)
+- See medal leaderboard
 
-## Tech Stack
+- Add new lap times for each track
 
-- Next.js
-- Vercel
-- Tailwind CSS
-- Supabase
+- Upload race results and review all sessions
+
+- Upload races for a season to keep track of points
+
+- See your own progress on the dashboard with a graph
+
+- See track information and all recorded lap times in a table
+
+### Tech Stack
+
+For the front-end I used Next.js (pages router) with TailwindCSS. The API routes where also created in Next.js and the data is stored in a PostgreSQL database on Supabase.

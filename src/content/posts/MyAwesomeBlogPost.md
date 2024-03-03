@@ -1,7 +1,7 @@
 ---
 title: My Awesome Blog Post
 author: Ugur Sadiklar
-date: '2024-03-01'
+date: 2024-03-01
 tags: [markdown, blogging, example]
 ---
 

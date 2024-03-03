@@ -1,14 +1,13 @@
 ---
 author: 'Ugur Sadiklar'
 category: ['instagram clone']
-date: '2024-02-29'
+date: 2024-02-29
 featured: false
 title: 'Instaclone'
-image: ./instaclone.jpg
+image: null
 description: 'An Instagram clone built with Next.js'
+draft: false
 ---
-
-# Instaclone
 
 [Link to repository](https://github.com/ugur-sa/instaclone)
 

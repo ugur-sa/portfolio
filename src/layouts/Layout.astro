@@ -15,20 +15,26 @@ import Footer from '../components/Footer.astro';
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.webp" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body>
 		<div class="m-auto flex h-screen flex-col justify-between p-8 xl:w-[40%] xl:p-0">
 			<Navigation />
-			<div class="flex-grow"><slot /></div>
+			<div class="mb-10 flex-grow"><slot /></div>
 			<Footer />
 		</div>
 	</body>
 </html>
 <style is:global>
 	html {
-		font-family: 'Geist', 'JetBrains Mono', sans-serif;
+		font-family: 'Arvo', 'JetBrains Mono', sans-serif;
 		background: #111010;
 		color: white;
 	}
