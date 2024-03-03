@@ -8,19 +8,23 @@ title: 'FSA'
 description: 'A project to analyse sentiment of financial news articles'
 ---
 
-# Financial Sentiment Analysis
+### Financial Sentiment Analysis
 
-This is a project I built for my bachelor's thesis in 2024. It's a simple project that is implemented with Python and deployed to AWS.
+<span class="text-lg">This is a project I built for my bachelor's thesis in 2024. It's a simple project created with Nextjs and deployed to AWS and Vercel.</span>
 
-## Features
+#### Features
 
-- Analyse sentiment of financial news articles
+<ul>
+  <li class="text-lg">Analyse sentiment of financial news articles</li>
+</ul>
 
-## Tech Stack
+#### Tech Stack
 
-- Next.js
-- Vercel
-- Tailwind CSS
-- AWS Lambda
-- AWS API Gateway
-- AWS DynamoDB
+<ul>
+  <li class="text-lg">Next.js</li>
+  <li class="text-lg">Vercel</li>
+  <li class="text-lg">Tailwind CSS</li>
+  <li class="text-lg">AWS Lambda</li>
+  <li class="text-lg">AWS API Gateway</li>
+  <li class="text-lg">AWS DynamoDB</li>
+</ul>
