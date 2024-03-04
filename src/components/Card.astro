@@ -9,15 +9,13 @@ const { href, title, body } = Astro.props;
 ---
 
 {/* create a card component with tailwindcss for darkmode using the props above */}
-<div
-	class="transform rounded-lg bg-white shadow-lg transition duration-500 hover:scale-105 dark:bg-zinc-900"
->
+<div class="transform rounded-lg bg-zinc-900 shadow-lg transition duration-500 hover:scale-105">
 	<a href={href}>
 		<div class="p-4">
 			<div class="flex items-center gap-5">
-				<h1 class="text-2xl font-bold text-gray-800 dark:text-white">{title}</h1>
+				<h1 class="text-2xl font-bold text-white">{title}</h1>
 			</div>
-			<p class="mt-2 text-gray-600 dark:text-gray-300">{body}</p>
+			<p class="mt-2 text-gray-300">{body}</p>
 		</div>
 	</a>
 </div>
