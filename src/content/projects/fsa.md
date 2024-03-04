@@ -1,11 +1,13 @@
 ---
+title: 'Sentiment Analysis'
 author: 'Ugur Sadiklar'
-category: ['machine learning, bert, yahoo finance']
-date: 2024-02-29
-featured: false
-image: /images/fsa/logo.png
-title: 'FSA'
 description: 'A project to analyse sentiment of financial news articles'
+category:
+  - machine learning
+  - bert
+  - yahoo finance
+date: 2024-02-29
+image: /images/fsa/logo.png
 draft: false
 ---
 

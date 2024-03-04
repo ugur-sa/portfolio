@@ -2,7 +2,8 @@
 author: Ugur Sadiklar
 category:
   - sim racing
-date: 2024-03-03T19:08:43.602Z
+  - formula1
+date: 2024-03-03
 featured: false
 image: /images/raceboards/f1.webp
 title: Raceboards

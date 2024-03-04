@@ -1,6 +1,7 @@
 ---
 author: 'Ugur Sadiklar'
-category: ['instagram clone']
+category:
+  - clone
 date: 2024-02-29
 featured: false
 title: 'Instaclone'
