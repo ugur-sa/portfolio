@@ -27,14 +27,21 @@ const { Content } = await project.render();
 
 <Layout title={`Projects | ${project.data.title}`}>
 	<div class="mb-8">
+		<div class="flex gap-2">
+			{
+				project.data.category.map((category) => (
+					<span class="text-xs font-light text-zinc-400">{category}</span>
+				))
+			}
+		</div>
 		<span class="mb-4 flex items-center gap-4"
 			><h1 class="text-3xl font-bold">{project.data.title}</h1>{
 				project.data.image !== null && (
 					<Image
 						src={project.data.image}
 						alt={project.data.title}
-						width={50}
-						height={50}
+						width={40}
+						height={40}
 						class={'rounded-full'}
 					/>
 				)
