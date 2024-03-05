@@ -6,7 +6,6 @@ category:
 date: 2024-03-05
 featured: false
 title: 'Instaclone'
-image: null
 description: 'An Instagram clone built with Next.js'
 draft: false
 gallery:

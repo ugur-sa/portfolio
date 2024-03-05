@@ -5,7 +5,7 @@ const projectCollection = defineCollection({
 		author: z.string(),
 		title: z.string(),
 		date: z.date(),
-		image: z.string().nullable(),
+		image: z.string().optional(),
 		description: z.string(),
 		draft: z.boolean(),
 		category: z.string().array(),

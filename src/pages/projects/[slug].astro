@@ -37,7 +37,7 @@ const { Content } = await project.render();
 		</div>
 		<span class="mb-4 flex items-center gap-4"
 			><h1 class="text-3xl font-bold">{project.data.title}</h1>{
-				project.data.image !== null && (
+				project.data.image !== null && project.data.image !== undefined && (
 					<Image
 						src={project.data.image}
 						alt={project.data.title}
