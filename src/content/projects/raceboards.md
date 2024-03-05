@@ -10,6 +10,16 @@ title: Raceboards
 description: A simple project to keep track of lap times and races for sim racers
 slug: raceboards
 draft: false
+gallery:
+  - /images/raceboards/raceboards_bestTimes.JPG
+  - /images/raceboards/TrackInformation.JPG
+  - /images/raceboards/leaderboards.JPG
+  - /images/raceboards/times.JPG
+  - /images/raceboards/progress.JPG
+  - /images/raceboards/season2023.JPG
+  - /images/raceboards/race.JPG
+  - /images/raceboards/racegaps.JPG
+  - /images/raceboards/qualilaps.JPG
 ---
 
 ### Overview
@@ -51,15 +61,3 @@ I learned a lot about how to use Prisma and Supabase to create a simple backend 
 
 - Live Project: [raceboards.ugursadiklar.de](https://raceboards.ugursadiklar.de)
 - Source Code: [Github](https://github.com/ugur-sa/raceboards)
-
-### Gallery
-
-![Lap Times](/images/raceboards/raceboards_bestTimes.JPG)
-![Track Information](/images/raceboards/TrackInformation.JPG)
-![Leaderboards](/images/raceboards/leaderboards.JPG)
-![User Times](/images/raceboards/times.JPG)
-![Progress](/images/raceboards/progress.JPG)
-![Season 2023](/images/raceboards/season2023.JPG)
-![Race results](/images/raceboards/race.JPG)
-![Race Gaps Graph](/images/raceboards/racegaps.JPG)
-![Quali Laps Driver](/images/raceboards/qualilaps.JPG)

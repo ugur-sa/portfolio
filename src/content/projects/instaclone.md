@@ -9,6 +9,8 @@ title: 'Instaclone'
 image: null
 description: 'An Instagram clone built with Next.js'
 draft: false
+gallery:
+  - /images/instaclone/screenshot_home_page.png
 ---
 
 ### Overview
@@ -35,10 +37,6 @@ This project is an Instagram clone I built to learn about Infinite Scrolling, Im
 ### Results
 
 ### Lessons Learned
-
-### Gallery
-
-![Instaclone Homepage](/images/instaclone/screenshot_home_page.png)
 
 ### Futher Information
 

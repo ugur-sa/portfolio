@@ -9,6 +9,9 @@ category:
 date: 2024-03-05
 image: /images/fsa/logo.png
 draft: false
+gallery:
+  - /images/fsa/screenshot1.JPG
+  - /images/fsa/screenshot2.JPG
 ---
 
 ### Overview
@@ -39,11 +42,6 @@ The project was successfully launched in January 2024 and has been praised by my
 
 Throughout this project, I learned how to create datasets, train a BERT mode, and deploy a real-time analysis system.
 I also had the opportunity to work with AWS Lambda and API Gateway, which was a great learning experience.
-
-### Gallery
-
-![FSA Index](/images/fsa/screenshot1.JPG)
-![FSA Analysis](/images/fsa/screenshot2.JPG)
 
 ### Futher Information
 

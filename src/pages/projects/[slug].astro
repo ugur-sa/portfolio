@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Prose from '../../components/Prose.astro';
 import { Image } from 'astro:assets';
+import Gallery from '../../components/Gallery';
 
 export const getStaticPaths = async () => {
 	const projects = await getCollection('projects');
@@ -54,4 +55,12 @@ const { Content } = await project.render();
 	<Prose>
 		<Content />
 	</Prose>
+	{
+		project.data.gallery && (
+			<div class="hidden lg:block">
+				<h1 class="mt-8 text-2xl font-bold">Gallery</h1>
+				<Gallery images={project.data.gallery} client:visible />
+			</div>
+		)
+	}
 </Layout>
