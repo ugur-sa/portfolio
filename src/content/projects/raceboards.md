@@ -11,15 +11,17 @@ description: A simple project to keep track of lap times and races for sim racer
 slug: raceboards
 draft: false
 gallery:
-  - /images/raceboards/raceboards_bestTimes.JPG
-  - /images/raceboards/TrackInformation.JPG
-  - /images/raceboards/leaderboards.JPG
-  - /images/raceboards/times.JPG
-  - /images/raceboards/progress.JPG
-  - /images/raceboards/season2023.JPG
-  - /images/raceboards/race.JPG
-  - /images/raceboards/racegaps.JPG
-  - /images/raceboards/qualilaps.JPG
+  - /images/raceboards/raceboards_bestTimes.png
+  - /images/raceboards/TrackInformation.png
+  - /images/raceboards/TrackInformation2.png
+  - /images/raceboards/leaderboards.png
+  - /images/raceboards/times.png
+  - /images/raceboards/times2.png
+  - /images/raceboards/progress.png
+  - /images/raceboards/season2023.png
+  - /images/raceboards/race.png
+  - /images/raceboards/racegaps.png
+  - /images/raceboards/qualilaps.png
 ---
 
 ### Overview

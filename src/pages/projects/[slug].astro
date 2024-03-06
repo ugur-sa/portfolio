@@ -57,7 +57,7 @@ const { Content } = await project.render();
 	</Prose>
 	{
 		project.data.gallery && (
-			<div class="hidden lg:block">
+			<div class="">
 				<h1 class="mt-8 text-2xl font-bold">Gallery</h1>
 				<Gallery images={project.data.gallery} client:visible />
 			</div>
