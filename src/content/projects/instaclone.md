@@ -8,8 +8,6 @@ featured: false
 title: 'Instaclone'
 description: 'An Instagram clone built with Next.js'
 draft: false
-gallery:
-  - /images/instaclone/screenshot_home_page.png
 ---
 
 ### Overview
