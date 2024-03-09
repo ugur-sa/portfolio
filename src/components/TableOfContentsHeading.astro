@@ -1,0 +1,20 @@
+---
+// TableOfContentsHeading.astro
+const { heading } = Astro.props;
+const headingMargin = heading.depth === 1 ? 0 : 20 * (heading.depth - 1);
+---
+
+<li>
+	<a href={'#' + heading.slug} style={{ marginLeft: `${headingMargin}px` }}>
+		{heading.text}
+	</a>
+	{
+		heading.subheadings.length > 0 && (
+			<ul>
+				{heading.subheadings.map((subheading: any[]) => (
+					<Astro.self heading={subheading} />
+				))}
+			</ul>
+		)
+	}
+</li>
