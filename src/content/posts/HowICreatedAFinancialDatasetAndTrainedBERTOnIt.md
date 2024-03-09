@@ -5,15 +5,17 @@ date: 2024-03-07
 tags: [bert, huggingface, finance, machine learning, nlp, python, jupyter]
 ---
 
-### Introduction
+# Introduction
 
-For my bachlor thesis I wanted to create a dataset of sentences from Yahoo Finance news articles and train a pre-trained BERT model on it. In this post, I will explain all the steps it took to create the dataset and train the model.
+For my bachelor thesis, I wanted to create a dataset of sentences from Yahoo Finance news articles and train a pre-trained BERT model on it. In this post I will explain all the steps I took to create the dataset and train the model.
 
-### How I created the dataset
+# How I created the dataset
 
-First, I decided to only use articles in the Business category.
+## Extracting the articles HTML
 
-Second, I analyzed the HTML structure of a Yahoo Finance news article page. I found that the article text is inside a div with the class "caas-body".
+First, I decided to use only articles in the Business category.
+
+Second, I analysed the HTML structure of a Yahoo Finance news article page. I found that the article text was inside a div with the class "caas-body".
 
 ```html
 <div class="caas-body">...</div>
@@ -32,7 +34,7 @@ Inside this div there are multiple p tags that contain the sentences of the arti
 </p>
 ```
 
-After that I started to create a notebook to scrape the text from the articles and save them to an SQLite database. For the scraping part I used the BeautifulSoup library. In the following code snippets I will shortly explain how I did it:
+I then started to create a notebook to scrape the text from the articles and store it in a SQLite database. For the scraping part, I used the BeautifulSoup library. The following code snippets will explain how I did it:
 
 ```python
 res = requests.get(link) # link is the URL of the article
@@ -71,9 +73,11 @@ for p in soup.find_all('p'):
     text = text + p.text + "\n"
 ```
 
-This scraping script is very rudimentary and only works for the specific HTML structure of Yahoo Finance news articles. For example it does not work for articles that contain images or videos. Also it is not able to extract only the useful sentences from the articles, because they are so dynamic in their structure. But for my purpose it was enough.
+This scraping script is very rudimentary and only works for the specific HTML structure of Yahoo Finance news articles. For example, it will not work on articles that contain images or videos. It is also not able to extract just the useful sentences from the articles because they are so dynamic in their structure. But it was good enough for my purposes.
 
-Now I needed to find a way to automate the scraping of link articles to feed into this script. I went for the Selenium library to automate this process in a headless browser. I created another notebook that opens a Chrome browser, scrolls down on the cookie modal, clicks deny, then scrolls down to the bottom of the page to load more articles. After that it extracts the HTML of the page. When this is done, BeautifulSoup is used to extract the links of the articles and save them to a list. This list is then used to feed the scraping script.
+## Extracting all available links from the news page
+
+Now I needed to find a way to automate the scraping of link articles to feed this script. I used the Selenium library to automate this process. I created another notebook that opens a Chrome browser, scrolls down on the cookie modal, clicks deny, then scrolls down to the bottom of the page to load more articles. It then extracts the HTML from the page. Once this is done, BeautifulSoup is used to extract the links from the articles and store them in a list. This list is then used to feed the scraping script.
 
 This code opens a Chrome browser and gets the HTML of the Yahoo Finance news page:
 
@@ -98,7 +102,7 @@ cookie_button.click()
 
 html_element = driver.find_element(By.TAG_NAME, 'html')
 
-# Drücke 16 Mal die "End"-Taste, um ans Ende der Seite zu scrollen (dynamisch geladenes HTML)
+# Drücke 16 Mal die "End"-Taste
 for _ in range(16):
     html_element.send_keys(Keys.END)
     time.sleep(1)
@@ -140,9 +144,11 @@ with open('links.txt', 'a') as f:
         f.write(link + '\n')
 ```
 
-Now that I had the links in a file, I could use the scraping script from before and just loop over all the links to scrape each articles text and save it to the database.
+Now that I had the links in a file, I could use the scraping script from before and just loop over all the links to scrape the text of each article and store it in the database.
 
-This was the first step of the creation process. Step two was to split the text into each sentence, save them to another table and then with the help of three BERT models ([FinancialBERT](https://huggingface.co/Sigma/financial-sentiment-analysis), [FinBERT](https://huggingface.co/ProsusAI/finbert) and [DistilRoBERTa](https://huggingface.co/mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis)) classify each sentence into one of the following categories: "bullish", "bearish" or "neutral". Each model was trained on a different pre-trained BERT model and fine-tuned on the [financial_phrasebank](https://huggingface.co/datasets/financial_phrasebank) dataset.
+## Splitting the text into sentences
+
+This was the first step in the process. The second step was to split the text into individual sentences, save them in another table and then use three BERT models ([FinancialBERT](https://huggingface.co/Sigma/financial-sentiment-analysis), [FinBERT](https://huggingface.co/ProsusAI/finbert) and [DistilRoBERTa](https://huggingface.co/mrm8488/distilroberta-finetuned-financial-news-sentiment-analysis)) to classify each sentence into one of the following categories: "bullish", "bearish" or "neutral". Each model was trained on a different pre-trained BERT model and fine-tuned on the [financial_phrasebank](https://huggingface.co/datasets/financial_phrasebank) dataset.
 
 For the sentence extraction part there exist libraries like NLTK but I found a little script that uses regular expressions and neat little tricks to do a better job:
 
@@ -272,7 +278,9 @@ def replace_sentence_stops_in_quotes(text):
     return text
 ```
 
-With a little bit of tuning, this script was able to split the text into sentences the way I wanted. After the sentences have been split, they were saved into a table called **sentences** in the database.
+With a little tweaking, this script was able to split the text into sentences the way I wanted. Once the sentences were split, they were stored in a table called **sentences** in the database.
+
+## Classifying the sentences
 
 The following script, gets all sentences, classifies them with the selected model and then saves the classification to the database:
 
@@ -331,4 +339,276 @@ conn.commit()
 conn.close()
 ```
 
-### IN PROGRESS
+## Manual classification of sentences
+
+Some sentences could not be classified with the majority of points from the models. For these sentences I wanted to classify them manually.
+I wrote a small Python application that showed all the sentences marked for manual classification and also gave me the scores of the models for each sentence. I then classified each sentence and saved the result to the database.
+
+![Manual classification](/images/blog/Labeler.JPG)
+
+# Training the BERT model
+
+For the training part I used the FinancialBERT pre-trained Model from [ahmedrachid](https://huggingface.co/ahmedrachid) because it was pre-trained on a large corpus of financial texts such as:
+
+- TRC2-financial: 1.8M news articles that were published by Reuters between 2008 and 2010.
+- Bloomberg News: 400,000 articles between 2006 and 2013.
+- Corporate Reports: 192,000 transcripts (10-K & 10-Q)
+- Earning Calls: 42,156 documents.
+
+This seemed the smarter choice for my purpose, rather than using the standard BERT base model.
+
+The following sections will all explain the training process in detail.
+
+## Preparing the dataset
+
+Before I started training, I had to prepare the dataset for the model to work with. For that, I extracted all the sentences and their classification from my SQLite database. The cell below from my notebook shows this first step:
+
+```python
+import sqlite3
+from sklearn.model_selection import train_test_split
+
+# Connect to the database
+conn = sqlite3.connect('data/sentiment.db')
+cursor = conn.cursor()
+
+# Fetch the data from the "sentences" table
+cursor.execute("SELECT sentence_text, final_sentiment FROM sentences WHERE final_sentiment != 'manual'")
+data = cursor.fetchall()
+
+# Close the database connection
+conn.close()
+
+# Convert data to a dictionary with the keys "text" and "label"
+data = [{"text": text, "label": label} for text, label in data]
+# Convert bullish to 0, neutral to 1, and bearish to 2
+# data = [{"text": row["text"], "label": 0 if row["label"] == "bullish" else 1 if row["label"] == "neutral" else 2} for row in data]
+data = [{"text": row["text"], "label": 0 if row["label"] == "bearish" else 1 if row["label"] == "neutral" else 2} for row in data]
+
+# Split the data into train, test, and validation sets
+train_data, test_data = train_test_split(data, test_size=0.15, random_state=42)
+train_data, val_data = train_test_split(train_data, test_size=0.15, random_state=42)
+
+# Print the sizes of the train, test, and validation sets
+print("Train data percentage:", (round((len(train_data) / len(data)) * 100)))
+print("Test data percentage:", (round((len(test_data) / len(data)) * 100)))
+print("Validation data percentage:", (round((len(val_data) / len(data)) * 100)))
+```
+
+Because I saved the classifiactions in text form, I had to convert them to numbers first. After that I split the data into training, test and validation sets.
+
+## Tokenizing the dataset
+
+After preparing the dataset, the sentences and their labels had to be tokenized so the model could work with them. The following code snippet shows how this was done:
+
+```python
+from transformers import AutoTokenizer
+import torch
+
+# Lade den Tokenizer
+# model_name = 'ahmedrachid/FinancialBERT'
+model_name = 'ahmedrachid/FinancialBERT-Sentiment-Analysis'
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+# Funktion, um die Daten zu tokenisieren
+def tokenize_data(data):
+    tokenized_data = []
+    for item in data:
+        # Tokenisiere den Text und füge das Ergebnis dem Array hinzu
+        encoding = tokenizer(
+            item['text'],
+            padding='max_length',  # Pad kürzere Sätze
+            truncation=True,       # Schneide längere Sätze ab
+            max_length=512,        # Maximale Länge auf BERT's limit setzen
+            return_tensors='pt'    # Rückgabe als PyTorch Tensoren
+        )
+        tokenized_data.append({'input_ids': encoding['input_ids'].squeeze(0), 'attention_mask': encoding['attention_mask'].squeeze(0), 'label': item['label']})
+    return tokenized_data
+
+# Tokenisiere Trainings-, Test- und Validierungsdaten
+train_data_tokenized = tokenize_data(train_data)
+val_data_tokenized = tokenize_data(val_data)
+test_data_tokenized = tokenize_data(test_data)
+```
+
+After this I had to convert the tokenized data to PyTorch datasets and also set a batch size for the training process. For my case I chose a batch size of 16 because I was training on a NVIDIA GeForce RTX 2080 Ti with 11 GB of VRAM.
+
+## Training the model
+
+The following code snippet shows how the training was done:
+
+```python
+from transformers import BertForSequenceClassification, get_linear_schedule_with_warmup, get_cosine_schedule_with_warmup
+import torch.optim as optim
+import json
+from sklearn.metrics import f1_score
+from tqdm.auto import tqdm
+import datetime
+
+metrics = {
+    'batch': [],
+    'train_loss': [],
+    'val_loss': [],
+    'f1': [],
+    'lr': []
+}
+
+# Füge diese Funktion hinzu, um die Validierungsleistung zu bewerten
+def evaluate(model, val_loader, device):
+    model.eval()  # Setze das Modell in den Evaluierungsmodus
+    total_eval_loss = 0
+
+    # Listen für wahre Labels und Vorhersagen
+    true_labels = []
+    predictions = []
+
+    for batch in val_loader:
+        # Übertrage die Batch-Daten auf das richtige Device (z.B. GPU)
+        input_ids = batch['input_ids'].to(device)
+        attention_mask = batch['attention_mask'].to(device)
+        labels = batch['label'].to(device)
+
+        with torch.no_grad():  # Deaktiviere die Gradientenberechnung für die Evaluation
+            outputs = model(input_ids, attention_mask=attention_mask, labels=labels)
+
+        loss = outputs.loss
+        total_eval_loss += loss.item()
+
+        # Berechne Vorhersagen
+        logits = outputs.logits
+        preds = torch.argmax(logits, dim=-1)
+
+        # Sammle wahre Labels und Vorhersagen für Metrikberechnung
+        predictions.extend(preds.cpu().numpy())
+        true_labels.extend(labels.cpu().numpy())
+
+    f1 = f1_score(true_labels, predictions, average='weighted')
+    return total_eval_loss / len(val_loader), f1  # Gib Durchschnittsverlust und Metriken zurück
+
+
+# Funktion zum Aktualisieren der Metriken nach jeder Epoche
+def update_metrics(batch, train_loss, val_loss, f1, lr):
+    metrics['batch'].append(batch)
+    metrics['train_loss'].append(train_loss)
+    metrics['val_loss'].append(val_loss)
+    metrics['f1'].append(f1)
+    metrics['lr'].append(lr)
+
+# id2label = {0: 'bullish', 1: 'neutral', 2: 'bearish'}
+# label2id = {'bullish': 0, 'neutral': 1, 'bearish': 2}
+
+id2label = {0: 'bearish', 1: 'neutral', 2: 'bullish'}
+label2id = {'bearish': 0, 'neutral': 1, 'bullish': 2}
+
+# Modell laden
+# model = BertForSequenceClassification.from_pretrained('ahmedrachid/FinancialBERT', num_labels=3, id2label=id2label, label2id=label2id)  # Angenommene 3 Labels: bullish, neutral, bearish
+# model = BertForSequenceClassification.from_pretrained('ahmedrachid/FinancialBERT-Sentiment-Analysis', num_labels=3, id2label=id2label, label2id=label2id,config=configuration)  # Angenommene 3 Labels: bullish, neutral, bearish
+
+model = BertForSequenceClassification.from_pretrained('ahmedrachid/FinancialBERT-Sentiment-Analysis', num_labels=3, id2label=id2label, label2id=label2id, hidden_dropout_prob=0.3)
+
+# Überprüfen, ob CUDA verfügbar ist und eine GPU zuweisen
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)  # Modell auf die GPU verschieben
+
+num_epochs = 3
+learning_rate = 2e-5 # 2e-5
+weight_decay = 0.01 # 0.0001
+current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")  # Timestamp to avoid overwriting
+
+# Optimierer definieren
+optimizer = optim.AdamW(model.parameters(), lr=learning_rate, weight_decay=weight_decay)
+# optimizer = optim.AdamW(model.parameters(), lr=learning_rate)
+
+# Gesamte Trainingssteps und Warm-Up Steps definieren
+total_steps = len(train_loader) * num_epochs  # Gesamte Anzahl von Trainingsschritten
+warmup_steps = int(total_steps * 0.1)  # 10% der Trainingsschritte als Warm-Up
+
+# Scheduler initialisieren
+# scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=total_steps)
+# scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=total_steps)
+
+logging_interval = 200 # Logge die Metriken alle 100 Batches
+
+# Create a directory name with hyperparameters
+dir_name = f"model_epoch{num_epochs}_lr{learning_rate}_bs{batch_size}_withFinancialPhrasebank_withDropout03_nullGradientFirst_{current_time}"
+
+# Specify the base path where you want to save the models
+base_path = "models/financial_phrasebank_test/"
+
+# Full path
+save_path = base_path + dir_name
+
+global_batch = 0
+
+for epoch in range(num_epochs):  # num_epochs ist die Anzahl der Epochen, die du trainieren möchtest
+    # Progress bar with tqdm
+    progress_bar = tqdm(enumerate(train_loader), desc=f"Epoch {epoch + 1}/{num_epochs}", total=len(train_loader), unit="batch")
+
+    for batch in train_loader:
+        model.train()  # Setze das Modell wieder in den Trainingsmodus
+        # Extrahiere Daten aus dem Batch
+        input_ids = batch['input_ids'].to(device) # Übertrage die Eingabedaten auf das richtige Device (z.B. GPU)
+        attention_mask = batch['attention_mask'].to(device) # Maske für padding
+        labels = batch['label'].to(device)  # Stelle sicher, dass deine Labels als Tensor von numerischen Labels vorliegen
+
+        # Null the gradients
+        optimizer.zero_grad()
+
+        # Forward pass
+        outputs = model(input_ids, attention_mask=attention_mask, labels=labels) # Führe die Vorwärtsdurchläufe durch
+        loss = outputs.loss # Verlust berechnen
+
+        # Backward pass
+        loss.backward() # Berechne die Gradienten
+        optimizer.step() # Aktualisiere die Parameter und berechne die nächsten Gradienten
+        # scheduler.step()
+        # optimizer.zero_grad() # Null die Gradienten aus, damit sie nicht akkumuliert werden
+
+        # Update the progress bar
+        progress_bar.set_postfix(loss=loss.item())
+        progress_bar.update()
+
+        if global_batch % logging_interval == 0 and global_batch != 0:
+            # Evaluate the model on the validation set
+            val_loss, f1 = evaluate(model, val_loader, device)
+            update_metrics(global_batch, loss.item(), val_loss, f1, learning_rate) # scheduler.get_last_lr()[0]
+            print(f"Step: {global_batch}, Learning Rate {learning_rate}, Validation loss: {val_loss:.3f}, Train loss: {loss.item():.3f}, F1: {f1:.3f}")
+
+        global_batch += 1
+
+    # Save the model after each epoch
+    epoch_save_path = f"{save_path}/epoch_{epoch+1}"
+    model.save_pretrained(epoch_save_path)
+
+with open(f'{save_path}/metrics.json', 'w') as f:
+    json.dump(metrics, f)
+```
+
+To summarise this snippet, I first loaded the model and set the device to the GPU. Then I defined the optimiser and the scheduler. Then I started the training loop. In the loop I first set the model to training mode and then extracted the data from the batch. Then I set the gradients to zero, did a forward pass, calculated the loss, did a backward pass and updated the parameters. I then evaluated the model on the validation set and updated the metrics. At the end of each epoch I saved the model and the metrics.
+
+# Evaluation
+
+After the training process I evaluated the model on the test set. The following data shows the results:
+
+- Test Loss: 0.21471
+- Accuracy: 0.925752
+- F1-Score: 0.925923
+- Precision: 0.92701
+- Recall: 0.925752
+
+![Confusion Matrix](/images/blog/confusionMatrix.png)
+
+|              | precision | recall | f1   | support |
+| ------------ | --------- | ------ | ---- | ------- |
+| bullish      | 0.89      | 0.92   | 0.90 | 1097    |
+| neutral      | 0.96      | 0.91   | 0.93 | 1638    |
+| bearish      | 0.88      | 0.93   | 0.90 | 1020    |
+|              |           |        |      |         |
+| accuracy     |           |        | 0.92 | 3755    |
+| macro avg    | 0.91      | 0.92   | 0.91 | 3755    |
+| weighted avg | 0.92      | 0.92   | 0.92 | 3755    |
+
+Even though the training data was not perfect I managed to achieve an accuracy of 92.6% on the test set. This is a very good result for my purpose.
+
+# Conclusion
+
+This project was very interesting and I learnt a lot from it. I was able to create a dataset of financial sentences and train a pre-trained BERT model on it. The model was able to classify the sentences into the categories "bullish", "bearish" and "neutral" with an accuracy of 92.6%. I also learned a lot about the BERT model and how to train it. I am very happy with the results and look forward to using the model in my bachelor thesis.

@@ -5,7 +5,7 @@ date: 2024-03-06
 tags: [markdown, astro, portfolio]
 ---
 
-### Introduction
+# Introduction
 
 After working with Angular and React (Next.js), I wanted to explore new options for my portfolio. I chose to use Astro because it generates static sites and does not send any JavaScript to the client by default.
 
@@ -13,7 +13,7 @@ However, you may have noticed some client-side components, such as the gallery i
 
 In this post, I will explain how I created this website.
 
-### How I setup this project
+# How I setup this project
 
 I started by creating a new Astro project with the following command:
 
@@ -29,7 +29,7 @@ npx astro add tailwind react
 
 After that I was ready to go.
 
-### How I created the gallery component
+# How I created the gallery component
 
 I wanted to display screenshots of my projects on their respective pages using React. To achieve this, you can create a `.jsx` or `.tsx` file in the components folder and imported it into the `.astro` file.
 
@@ -39,4 +39,4 @@ I mapped over the array and rendered the images. With a simple state variable, I
 
 However, the images were cut off due to the fixed size of the gallery. To improve the user experience, I added a modal that opens when the user clicks on an image. This modal displays the image in full size and allows the user to navigate through the images using the same buttons as in the gallery.
 
-### IN PROGRESS
+# IN PROGRESS
