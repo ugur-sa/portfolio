@@ -5,7 +5,11 @@ const headingMargin = heading.depth === 1 ? 0 : 20 * (heading.depth - 1);
 ---
 
 <li>
-	<a href={'#' + heading.slug} style={{ marginLeft: `${headingMargin}px` }}>
+	<a
+		href={'#' + heading.slug}
+		style={{ marginLeft: `${headingMargin}px` }}
+		class="text-blue-600 hover:underline"
+	>
 		{heading.text}
 	</a>
 	{
