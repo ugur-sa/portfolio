@@ -27,16 +27,24 @@ const posts = await getCollection('posts').then((posts) => {
 });
 ---
 
-<Layout title="Ugur Sadiklar">
+<Layout title='Ugur Sadiklar'>
 	<div>
-		<h1 class="mb-8 text-3xl font-semibold">hey, I'm Ugur 👋</h1>
-		<p class="mb-8 text-xl">I'm a full-stack web developer. I currently attend university.</p>
-		<div class="mb-16">
-			<IndexTitle title="Projects" href="projects" viewAll={amountProjects > 4} />
+		<h1 class='mb-8 text-3xl font-semibold'>hey, I'm Ugur 👋</h1>
+		<p class='mb-8 text-xl'>I'm a full-stack web developer. I currently attend university.</p>
+		<div class='mb-16'>
+			<IndexTitle
+				title='Projects'
+				href='projects'
+				viewAll={amountProjects > 4}
+			/>
 			<ProjectsGrid projects={projects} />
 		</div>
 		<div>
-			<IndexTitle title="Latest Posts" href="blog" viewAll={amountPosts > 3} />
+			<IndexTitle
+				title='Latest Posts'
+				href='blog'
+				viewAll={amountPosts > 3}
+			/>
 			<PostsTable posts={posts} />
 		</div>
 	</div>
