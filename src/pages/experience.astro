@@ -1,0 +1,76 @@
+---
+import SkillCard from '../components/SkillCard.astro';
+import SkillsGrid from '../components/SkillsGrid.astro';
+import WorkExperienceCard from '../components/WorkExperienceCard.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title='Experience | Ugur Sadiklar'>
+	<div class='mb-8'>
+		<h2 class='mb-4 text-2xl font-bold'>Skills</h2>
+		<SkillsGrid />
+	</div>
+	<div class='mb-8'>
+		<h2 class='mb-4 text-2xl font-bold'>Work</h2>
+		<div class='flex flex-col gap-8'>
+			<WorkExperienceCard
+				company='PricewaterhouseCoopers GmbH'
+				companyShort='PwC'
+				logo='images/companies/PricewaterhouseCoopers_Logo.svg'
+				location='Düsseldorf, Germany'
+				position='Software Developer Intern'
+				startDate={new Date(2022, 8, 1)}
+				endDate={new Date(2023, 1, 0)}>
+				<ul class='flex list-inside list-disc flex-col gap-4 text-sm'>
+					<li>Development of Special Funds Reporting (SFR) Tool</li>
+					<li>Contributed to designing functionality for the project "Rule Assistant"</li>
+					<li>Development of Chatbot Olivia</li>
+					<li>Initiation and Development of Corporate Treasury Services (CTS) Tool</li>
+					<li>Tools: Angular (Typescript), ASP.NET Core (C#), MSSQL, Microsoft Azure</li>
+				</ul>
+			</WorkExperienceCard>
+		</div>
+	</div>
+	<div class='mb-8'>
+		<h2 class='mb-4 text-2xl font-bold'>Education</h2>
+		<div class='flex flex-col gap-8'>
+			<WorkExperienceCard
+				company='Niederrhein University of Applied Sciences'
+				companyShort='HSNR'
+				logo='images/logos/hsnr_dunkel_logo2.png'
+				location='Mönchengladbach, Germany'
+				position='Business Informatics B.Sc.'
+				startDate={new Date(2020, 9, 1)}
+				endDate={new Date(2024, 5, 1)}>
+				<ul class='flex list-inside list-disc flex-col gap-4 text-sm'>
+					<li>
+						<strong>Bachelor Thesis:</strong> Creating a financial news dataset and training BERT for
+						sentiment analysis
+					</li>
+					<li>GPA 2.0 (Germany)</li>
+					<li>Projects with Arduino (Communication System), .NET Framework, Java, and SQL</li>
+					<li>Full-Stack IoT Web-App Project development (Module: Web Applications)</li>
+					<li>Attended: Marketing, Project Management, (Macro)Economics, Business Plans</li>
+					<li>
+						Attended: Cyber Security, Databases, Algorithms & Data Structures, Object Oriented
+						Programming I/II, Requirements Engineering, Software Development with .NET Framework
+					</li>
+				</ul>
+			</WorkExperienceCard>
+			<WorkExperienceCard
+				company='Gymnasium an der Gartenstraße'
+				companyShort='Gymga'
+				logo='https://foerderverein.gymga.de/wp-content/uploads/2019/01/cropped-Gymga-Tor-Farbe-trans.png'
+				location='Mönchengladbach, Germany'
+				position='A-Levels (Abitur)'
+				startDate={new Date(2010, 8, 1)}
+				endDate={new Date(2018, 5, 24)}>
+				<ul class='flex list-inside list-disc flex-col gap-4 text-sm'>
+					<li>Advanced Courses: Maths and Physics</li>
+					<li>GPA 2.1 (Germany)</li>
+					<li>Top of the year in physics</li>
+				</ul>
+			</WorkExperienceCard>
+		</div>
+	</div>
+</Layout>
