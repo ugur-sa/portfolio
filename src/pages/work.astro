@@ -1,12 +1,31 @@
 ---
+import WorkExperienceCard from '../components/WorkExperienceCard.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Work | Ugur Sadiklar">
-	<div class="mb-8">
-		<h2 class="mb-4 text-2xl font-bold">Experience</h2>
+<Layout title='Work | Ugur Sadiklar'>
+	<div class='mb-8'>
+		<h2 class='mb-4 text-2xl font-bold'>Skills</h2>
 	</div>
-	<div class="mb-8">
-		<h2 class="mb-4 text-2xl font-bold">Skills</h2>
+	<div class='mb-8'>
+		<h2 class='mb-4 text-2xl font-bold'>Experience</h2>
+		<div class='flex flex-col gap-8'>
+			<WorkExperienceCard
+				company='PricewaterhouseCoopers GmbH'
+				companyShort='PwC'
+				logo='images/companies/PricewaterhouseCoopers_Logo.svg'
+				location='Düsseldorf, Germany'
+				position='Software Developer Intern'
+				startDate={new Date(2022, 8, 1)}
+				endDate={new Date(2023, 1, 0)}>
+				<ul class='flex list-inside list-disc flex-col gap-4 text-sm'>
+					<li>Development of Special Funds Reporting (SFR) Tool</li>
+					<li>Contributed to designing functionality for the project "Rule Assistant"</li>
+					<li>Development of Chatbot Olivia</li>
+					<li>Initiation and Development of Corporate Treasury Services (CTS) Tool</li>
+					<li>Tools: Angular (Typescript), ASP.NET Core (C#), MSSQL, Microsoft Azure</li>
+				</ul>
+			</WorkExperienceCard>
+		</div>
 	</div>
 </Layout>
