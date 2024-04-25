@@ -1,0 +1,24 @@
+---
+interface Props {
+	logo: string;
+	name: string;
+	link?: string;
+}
+
+const { logo, name } = Astro.props;
+---
+
+<div
+	class='flex w-fit items-center justify-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 p-3'>
+	<img
+		src={logo}
+		alt={name}
+		width='15'
+		height='15'
+	/>
+	<a
+		href='/'
+		class='text-xs font-semibold hover:text-gray-300'
+		>{name}</a
+	>
+</div>

@@ -12,7 +12,7 @@ interface Props {
 const { company, companyShort, position, startDate, endDate, location, logo } = Astro.props;
 ---
 
-<div class='flex w-full flex-col rounded-md bg-zinc-900 shadow-2xl'>
+<div class='flex w-full flex-col rounded-md bg-zinc-900 bg-opacity-25 shadow-2xl'>
 	<div class='flex h-20 w-full justify-between border-b border-zinc-700'>
 		<div class='flex items-center gap-4'>
 			{
@@ -38,7 +38,7 @@ const { company, companyShort, position, startDate, endDate, location, logo } = 
 			<slot />
 		</div>
 	</div>
-	<div class='flex h-12 w-full items-center bg-zinc-800 text-sm'>
+	<div class='flex h-12 w-full items-center bg-zinc-800 bg-opacity-25 text-sm'>
 		<p class='ml-4'>{startDate.toLocaleDateString('de-DE')}</p>
 		<p class='mx-2'>-</p>
 		{endDate ? <p>{endDate.toLocaleDateString('de-DE')}</p> : <p>Present</p>}
