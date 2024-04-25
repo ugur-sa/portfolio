@@ -5,7 +5,7 @@ interface Props {
 	link?: string;
 }
 
-const { logo, name } = Astro.props;
+const { logo, name, link } = Astro.props;
 ---
 
 <div
@@ -16,9 +16,16 @@ const { logo, name } = Astro.props;
 		width='15'
 		height='15'
 	/>
-	<a
-		href='/'
-		class='text-xs font-semibold hover:text-gray-300'
-		>{name}</a
-	>
+	{
+		link ? (
+			<a
+				href={link}
+				target='_blank'
+				class='text-xs font-semibold hover:text-gray-300'>
+				{name}
+			</a>
+		) : (
+			<p class='text-xs font-semibold'>{name}</p>
+		)
+	}
 </div>
