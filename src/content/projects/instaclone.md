@@ -4,6 +4,7 @@ category:
   - clone
   - next.js
 date: 2024-03-05
+created: 2023-06-29
 featured: false
 title: 'Instaclone'
 description: 'An Instagram clone built with Next.js'

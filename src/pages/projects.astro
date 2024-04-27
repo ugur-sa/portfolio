@@ -3,18 +3,67 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
 const projects = await getCollection('projects');
+
+const getAllYearsFromProjects = () => {
+	const years = projects.map((project) => {
+		return project.data.created.getFullYear();
+	});
+	years.sort((a, b) => b - a);
+	return [...new Set(years)];
+};
+
+const getProjectsByYear = (year) => {
+	return projects.filter((project) => {
+		return project.data.created.getFullYear() === year;
+	});
+};
 ---
 
-<Layout title="Projects | Ugur Sadiklar">
-	{/* List of all projects */}
-	<h1 class="mb-10 text-4xl font-bold">Projects</h1>
+<Layout title='Projects | Ugur Sadiklar'>
+	<h1 class='mb-10 text-4xl font-bold'>Projects</h1>
 	<ul>
 		{
-			projects.map((project) => (
+			getAllYearsFromProjects().map((year) => (
 				<li>
-					<a href={`/projects/${project.slug}`}>{project.data.title}</a>
+					<h2 class='mb-5 mt-10 text-2xl font-bold'>{year}</h2>
+					<ul>
+						{getProjectsByYear(year).map((project) => (
+							<li>
+								<div class='mb-5 w-fit transform rounded-2xl border border-zinc-800 bg-zinc-900 bg-opacity-25 p-3 shadow-2xl transition duration-500 hover:scale-105'>
+									<div class='flex items-center gap-2'>
+										<a
+											class='text-xl font-semibold hover:text-gray-300'
+											href={`/projects/${project.slug}`}>
+											{project.data.title}
+										</a>
+										{project.data.image && (
+											<img
+												class='rounded-full'
+												src={project.data.image}
+												alt={project.data.image}
+												width='25'
+												height='25'
+											/>
+										)}
+									</div>
+									<p>{project.data.description}</p>
+									<p class='text-xs text-zinc-400'>
+										Created {project.data.created.toLocaleDateString('de-DE')}
+									</p>
+								</div>
+							</li>
+						))}
+					</ul>
 				</li>
 			))
 		}
 	</ul>
 </Layout>
+
+<!-- {
+	projects.map((project) => (
+		<li>
+			<a href={`/projects/${project.slug}`}>{project.data.title}</a>
+		</li>
+	))
+} -->
