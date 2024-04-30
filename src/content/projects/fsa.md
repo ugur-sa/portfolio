@@ -41,7 +41,7 @@ The project was successfully launched in January 2024 and has been praised by my
 
 # Lessons Learned
 
-Throughout this project, I learned how to create datasets, train a BERT mode, and deploy a real-time analysis system.
+Throughout this project, I learned how to create datasets, train a BERT model, and deploy a real-time analysis system.
 I also had the opportunity to work with AWS Lambda and API Gateway, which was a great learning experience.
 
 # Futher Information
