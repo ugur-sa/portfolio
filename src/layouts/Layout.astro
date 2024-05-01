@@ -6,6 +6,7 @@ interface Props {
 const { title } = Astro.props;
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+import { ViewTransitions, slide } from 'astro:transitions';
 ---
 
 <!doctype html>
@@ -43,46 +44,51 @@ import Footer from '../components/Footer.astro';
 			content={Astro.generator}
 		/>
 		<title>{title}</title>
+		<ViewTransitions />
 	</head>
 	<body>
 		<div class='m-auto flex h-dvh flex-col justify-between p-8 xl:w-[40%] xl:p-0'>
 			<Navigation />
-			<div class='mb-10 flex-grow'><slot /></div>
+			<div
+				class='mb-10 flex-grow'
+				transition:animate={slide({ duration: '0.5s' })}>
+				<slot />
+			</div>
 			<Footer />
 		</div>
+		<style is:global>
+			html {
+				font-family: 'Arvo', 'JetBrains Mono', sans-serif;
+				color: white;
+				background: rgb(10, 10, 10);
+				background-image: radial-gradient(rgb(37, 37, 37) 1px, transparent 0);
+				background-size: 30px 30px;
+				background-position: -19px -19px;
+			}
+			body {
+				margin: 0;
+				padding: 0;
+			}
+			code {
+				font-family:
+					Menlo,
+					Monaco,
+					Lucida Console,
+					Liberation Mono,
+					DejaVu Sans Mono,
+					Bitstream Vera Sans Mono,
+					Courier New,
+					monospace;
+			}
+			.no-scrollbar::-webkit-scrollbar {
+				display: none;
+			}
+
+			/* Hide scrollbar for IE, Edge and Firefox */
+			.no-scrollbar {
+				-ms-overflow-style: none; /* IE and Edge */
+				scrollbar-width: none; /* Firefox */
+			}
+		</style>
 	</body>
 </html>
-<style is:global>
-	html {
-		font-family: 'Arvo', 'JetBrains Mono', sans-serif;
-		color: white;
-		background: rgb(10, 10, 10);
-		background-image: radial-gradient(rgb(37, 37, 37) 1px, transparent 0);
-		background-size: 30px 30px;
-		background-position: -19px -19px;
-	}
-	body {
-		margin: 0;
-		padding: 0;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-	.no-scrollbar::-webkit-scrollbar {
-		display: none;
-	}
-
-	/* Hide scrollbar for IE, Edge and Firefox */
-	.no-scrollbar {
-		-ms-overflow-style: none; /* IE and Edge */
-		scrollbar-width: none; /* Firefox */
-	}
-</style>

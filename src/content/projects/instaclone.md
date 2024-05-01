@@ -11,11 +11,11 @@ description: 'An Instagram clone built with Next.js'
 draft: false
 ---
 
-### Overview
+# Overview
 
 This project is an Instagram clone I built to learn about Infinite Scrolling, Image Uploading, Websockets for real-time chat and more. It's a simple project that is implemented with Next.js and deployed to Vercel.
 
-### Features
+# Features
 
 - Infinite Scrolling feed
 - Create Posts (image upload, caption)
@@ -24,19 +24,19 @@ This project is an Instagram clone I built to learn about Infinite Scrolling, Im
 - Follow/Unfollow users
 - Real-time chat
 
-### Tech Stack
+# Tech Stack
 
 - Frontend: [Next.js, Typescript, TailwindCSS]
 - Backend: [Node.js, Prisma, Uploadthing, Websockets (Socket.io), Clerk (Auth)]
 - Database: [MySQL (Planetscale)]
 
-### Challenges and Solutions
+# Challenges and Solutions
 
-### Results
+# Results
 
-### Lessons Learned
+# Lessons Learned
 
-### Futher Information
+# Futher Information
 
 - Live Project: not deployed
 - Source Code: [Github](https://github.com/ugur-sa/instaclone)

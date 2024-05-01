@@ -21,7 +21,7 @@ const getProjectsByYear = (year) => {
 
 <Layout title='Projects | Ugur Sadiklar'>
 	<h1 class='mb-10 text-4xl font-bold'>Projects</h1>
-	<ul>
+	<ul transition:name='project_title'>
 		{
 			getAllYearsFromProjects().map((year) => (
 				<li>
@@ -36,6 +36,7 @@ const getProjectsByYear = (year) => {
 											href={`/projects/${project.slug}`}>
 											{project.data.title}
 										</a>
+
 										{project.data.image && (
 											<img
 												class='rounded-full'
