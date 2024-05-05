@@ -44,7 +44,7 @@ The project was successfully launched in January 2024 and has been praised by my
 Throughout this project, I learned how to create datasets, train a BERT model, and deploy a real-time analysis system.
 I also had the opportunity to work with AWS Lambda and API Gateway, which was a great learning experience.
 
-# Futher Information
+# Further Information
 
 - Live Project: [fsa.ugursadiklar.de](http://fsa.ugursadiklar.de)
 - Source Code: [Github](https://github.com/ugur-sa/financial-sentiment-analysis)
