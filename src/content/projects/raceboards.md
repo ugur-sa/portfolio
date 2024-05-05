@@ -60,7 +60,7 @@ The project is live and we are using it for our sim racing league and to compare
 
 I learned a lot about how to use Prisma and Supabase to create a simple backend for a project like this. As this was my first project after working for 5 months with Angular and ASP.NET at my internship, it was a great way to keep my skills sharp and learn new technologies.
 
-# Futher Information
+# Further Information
 
 - Live Project: [raceboards.ugursadiklar.de](https://raceboards.ugursadiklar.de)
 - Source Code: [Github](https://github.com/ugur-sa/raceboards)

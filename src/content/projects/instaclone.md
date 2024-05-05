@@ -36,7 +36,7 @@ This project is an Instagram clone I built to learn about Infinite Scrolling, Im
 
 # Lessons Learned
 
-# Futher Information
+# Further Information
 
 - Live Project: not deployed
 - Source Code: [Github](https://github.com/ugur-sa/instaclone)
