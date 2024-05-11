@@ -9,23 +9,16 @@ const { logo, name, link } = Astro.props;
 ---
 
 <div
-	class='flex w-fit items-center justify-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 p-3'>
-	<img
-		src={logo}
-		alt={name}
-		width='15'
-		height='15'
-	/>
+	class="flex w-fit items-center justify-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 p-3"
+>
+	<img src={logo} alt={name} width="20" height="20" />
 	{
 		link ? (
-			<a
-				href={link}
-				target='_blank'
-				class='text-xs font-semibold hover:text-gray-300'>
+			<a href={link} target="_blank" class="text-xs font-semibold hover:text-gray-300">
 				{name}
 			</a>
 		) : (
-			<p class='text-xs font-semibold'>{name}</p>
+			<p class="text-xs font-semibold">{name}</p>
 		)
 	}
 </div>
