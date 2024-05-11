@@ -4,6 +4,8 @@ import Layout from '../../layouts/Layout.astro';
 import Prose from '../../components/Prose.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 
+export const prerender = true;
+
 export const getStaticPaths = async () => {
 	const posts = await getCollection('posts');
 	const paths = posts.map((posts: CollectionEntry<'posts'>) => ({
@@ -26,19 +28,17 @@ const { Content, headings } = await posts.render();
 ---
 
 <Layout title={`Blog | ${posts.data.title}`}>
-	<div
-		class='mb-8'
-		transition:name='blog_title'>
-		<div class='flex gap-2'>
-			{posts.data.tags.map((tag) => <span class='text-xs font-light text-zinc-400'>{tag}</span>)}
+	<div class="mb-8" transition:name="blog_title">
+		<div class="flex gap-2">
+			{posts.data.tags.map((tag) => <span class="text-xs font-light text-zinc-400">{tag}</span>)}
 		</div>
-		<h1 class='text-3xl font-bold'>{posts.data.title}</h1>
-		<p class='text-sm font-light text-zinc-400'>
+		<h1 class="text-3xl font-bold">{posts.data.title}</h1>
+		<p class="text-sm font-light text-zinc-400">
 			Published {new Date(posts.data.date).toLocaleDateString('de-DE')}
 		</p>
 	</div>
-	<div class='mb-8'>
-		<h3 class='mb-2 text-lg font-bold'>Table of contents</h3>
+	<div class="mb-8">
+		<h3 class="mb-2 text-lg font-bold">Table of contents</h3>
 		<TableOfContents headings={headings} />
 	</div>
 	<Prose>
