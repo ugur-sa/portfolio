@@ -35,13 +35,15 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 	};
 
 	return (
-		<div className="group relative m-auto h-[450px] w-full md:max-h-[500px] lg:max-h-[500px]">
+		<div className="group relative m-auto h-[450px] w-full overflow-hidden rounded-lg border border-zinc-600 md:max-h-[500px] lg:max-h-[500px]">
 			<div
-				className="absolute left-0 top-0 -z-50 h-full w-full object-cover opacity-30 blur-xl"
-				style={{ backgroundImage: `url(${images[currentImage]})` }}
+				className="absolute -z-50 h-full w-full overflow-hidden object-cover opacity-30 blur-xl"
+				style={{
+					backgroundImage: `url(${images[currentImage]})`
+				}}
 			></div>
 			<div
-				className="h-full w-full cursor-pointer rounded-2xl bg-contain bg-center bg-no-repeat duration-500"
+				className="h-full w-full cursor-zoom-in rounded-2xl bg-contain bg-center bg-no-repeat duration-500"
 				style={{ backgroundImage: `url(${images[currentImage]})` }}
 				onClick={openModal}
 			></div>
@@ -76,7 +78,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 							/>
 							<button
 								onClick={closeModal}
-								className="absolute right-0 top-0 z-50 mr-2 mt-2 rounded-full bg-black/20 p-2 hover:bg-white/10"
+								className="absolute right-0 top-0 z-50 mr-2 mt-2 rounded-full bg-black/20 p-2"
 							>
 								<IoClose size={40} />
 							</button>
