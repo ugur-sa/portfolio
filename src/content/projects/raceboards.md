@@ -14,7 +14,6 @@ draft: false
 gallery:
   - /images/raceboards/raceboards_bestTimes.png
   - /images/raceboards/TrackInformation.png
-  - /images/raceboards/TrackInformation2.png
   - /images/raceboards/leaderboards.png
   - /images/raceboards/times.png
   - /images/raceboards/times2.png

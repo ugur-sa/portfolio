@@ -11,8 +11,8 @@ created: 2024-01-11
 image: /images/fsa/logo.png
 draft: false
 gallery:
-  - /images/fsa/screenshot1.JPG
-  - /images/fsa/screenshot2.JPG
+  - /images/fsa/screenshot1.png
+  - /images/fsa/screenshot2.png
 ---
 
 # Overview
