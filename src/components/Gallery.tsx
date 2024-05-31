@@ -84,7 +84,12 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 							>
 								<IoClose size={30} />
 							</button>
-							<img src={images[currentImage]} alt="Modal" />
+							<img
+								src={images[currentImage]}
+								alt="Modal"
+								style={{ objectFit: 'contain', maxHeight: '100vh', maxWidth: '100vw' }}
+							/>
+
 							{/* Left Arrow*/}
 							<div className="absolute left-5 top-[50%] hidden -translate-x-0 translate-y-[-50%] cursor-pointer rounded-full bg-black/20 p-1 text-2xl text-white group-hover:block">
 								<MdChevronLeft size={30} onClick={previousSlide} />
