@@ -46,7 +46,6 @@ I also had the opportunity to work with AWS Lambda and API Gateway, which was a 
 
 # Further Information
 
-- Live Project: [fsa.ugursadiklar.de](http://fsa.ugursadiklar.de)
 - Source Code: [Github](https://github.com/ugur-sa/financial-sentiment-analysis)
 - Blog Post: [Link](https://ugursadiklar.de/posts/howicreatedafinancialdatasetandtrainedbertonit)
 - Bachelor Thesis: [Download](https://drive.google.com/file/d/1dH77l-xSdNMQszY1dAyKtiSdjhFBG7-F/view?usp=drive_link)
