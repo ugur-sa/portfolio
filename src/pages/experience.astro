@@ -1,5 +1,4 @@
 ---
-import SkillCard from '../components/SkillCard.astro';
 import SkillsGrid from '../components/SkillsGrid.astro';
 import WorkExperienceCard from '../components/WorkExperienceCard.astro';
 import Layout from '../layouts/Layout.astro';
@@ -13,21 +12,18 @@ import Layout from '../layouts/Layout.astro';
 	<div class='mb-8'>
 		<h2 class='mb-4 text-2xl font-bold'>Work</h2>
 		<div class='flex flex-col gap-8'>
-			{
-				/* 
 			<WorkExperienceCard
 				company='KPMG AG'
 				companyShort='KPMG'
 				logo='https://upload.wikimedia.org/wikipedia/commons/3/31/KPMG.svg'
 				location='Düsseldorf, Germany'
-				position='Full-Stack Software Developer'
+				position='Software Developer'
 				startDate={new Date(2024, 7, 15)}>
 				<ul class='flex list-inside list-disc flex-col gap-4 text-sm'>
+					<li>Contributed to KBAT project</li>
 					<li>Angular (Typescript), ASP.NET Core (C#), MSSQL, Microsoft Azure</li>
 				</ul>
 			</WorkExperienceCard>
-			*/
-			}
 			<WorkExperienceCard
 				company='PricewaterhouseCoopers GmbH'
 				companyShort='PwC'
